@@ -1,0 +1,11 @@
+@page "/admin"
+@model ITClassProject.Pages.AdminModel
+@{
+}
+
+<form method="post">
+	<label for="wantedUserName">Name</label> <br>
+	<input type="text" id="wantedUserName" name="wantedUserName"><br>
+	<input type="submit" value="Submit user name" class="submit-button"><br>
+	@Html.AntiForgeryToken()
+</form>

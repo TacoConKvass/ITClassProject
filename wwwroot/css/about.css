@@ -1,0 +1,24 @@
+.username-form {
+    box-shadow: rgba(0, 0, 0, 1) 10px, 10px, inset;
+    width: 300px;
+    background-color: rgba(100, 100, 100, .5);
+    align-content: center;
+    box-shadow: rgba(0, 0, 0, .8) 5px 5px, rgba(0, 0, 0, 1) 1px 1px, rgba(0, 0, 0, 1) -1px -1px;
+}
+
+.title-div {
+    background-color: rgba(0, 100, 138, 1);
+    text-anchor: 
+}
+
+.text-content {
+    width: 400px;
+}
+.main-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+}

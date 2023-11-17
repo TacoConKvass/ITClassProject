@@ -5,14 +5,19 @@
     ViewData["Title"] = "TEMP";
     Layout = "_Layout";
 }
+<link rel="stylesheet" type="text/css" href="/css/about.css">
 
-<h1>This is the about page</h1>
-<p>How enlightening</p>
-
-
-<form method="post">
-    <label for="uName">Name</label>
-    <input type="text" id="uName" name="uName"><br>
-    <input type="submit" value="Submit user name"><br>
-	@Html.AntiForgeryToken()
-</form>
+<div class="main-div">
+	<div class="text-content">
+		<p class="title-div">This is the about page</p>
+		<p>How enlightening</p>
+	</div>
+	<div class="username-form">
+		<form method="post" autocomplete="off" title="UserNameForm">
+			<label for="uName">Name</label> <br>
+			<input type="text" id="uName" name="uName"><br>
+			<input type="submit" value="Submit user name" class="submit-button"><br>
+			@Html.AntiForgeryToken()
+		</form>
+	</div>
+</div>

@@ -1,8 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <title>@ViewData["Title"]</title>
+	@ViewData["Admin"] = false;
     <link rel="stylesheet" type="text/css" href="/css/layout.css">
 </head>
 
@@ -11,11 +12,11 @@
         <a href="/">Main</a>
          | 
         <a href="/about">About</a>
+		 | 
+		<a href="/admin">Admin</a>
     </div>
 
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
+    @RenderBody()
 
     <div id="footer">
 

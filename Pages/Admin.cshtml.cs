@@ -1,16 +1,14 @@
+using ITClassProject.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Diagnostics;
-using ITClassProject.Database;
 
 namespace ITClassProject.Pages
 {
-    public class AboutModel : PageModel
+    public class AdminModel : PageModel
     {
 		UserDbContext context = new UserDbContext();
-        public void OnGet() {
-			context.GetAllRecords();
-		}
+		public void OnGet() {
+        }
 
 		public void OnPost() {
 			string userName = Request.Form["uName"].ToString();

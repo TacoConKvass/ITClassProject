@@ -5,8 +5,8 @@ namespace ITClassProject.Pages.Shared
 {
     public class _LayoutModel : PageModel
     {
-        public void OnGet()
-        {
+		public bool admin = false;
+        public void OnGet() {
         }
     }
 }
