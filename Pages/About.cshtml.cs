@@ -9,7 +9,6 @@ namespace ITClassProject.Pages
     {
 		UserDbContext context = new UserDbContext();
         public void OnGet() {
-			context.AddRecord("Uno");
 			context.GetAllRecords();
 		}
 
