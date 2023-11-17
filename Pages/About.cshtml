@@ -1,0 +1,27 @@
+﻿@page "/about"
+@model ITClassProject.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "TEMP";
+    Layout = "_Layout";
+
+    var uName = "";
+
+    await using var connection = new MySqlConnector.MySqlConnection(ITClassProject.Statics.connectString);
+    connection.Open();
+
+    using (var cmd = new MySqlConnector.MySqlCommand())
+    {
+        cmd.Connection = connection;
+        cmd.CommandText = "SELECT COUNT(*) FROM `uno-db`";
+        var id = cmd.ExecuteScalar();
+    }
+}
+
+<h1>This is the about page</h1>
+<p>How enlightening</p>
+<form method="post">
+    <label for="uName">Name</label>
+    <input type="text" id="uName" name="uName"><br>
+    <input type="submit" value="Submit user name"><br>
+</form>
