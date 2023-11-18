@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Diagnostics;
 using ITClassProject.Database;
 
 namespace ITClassProject.Pages
@@ -14,7 +13,7 @@ namespace ITClassProject.Pages
 
 		public void OnPost() {
 			string userName = Request.Form["uName"].ToString();
-			if (userName == "") {
+			if (string.IsNullOrEmpty(userName)) {
 				Console.WriteLine("Empty form");
 				return;
 			}

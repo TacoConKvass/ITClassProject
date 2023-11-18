@@ -1,11 +1,26 @@
 @page "/admin"
 @model ITClassProject.Pages.AdminModel
 @{
+	ViewData["Title"] = "ADMIN";
+	Layout = "_AdminLayout";
 }
 
-<form method="post">
-	<label for="wantedUserName">Name</label> <br>
-	<input type="text" id="wantedUserName" name="wantedUserName"><br>
-	<input type="submit" value="Submit user name" class="submit-button"><br>
-	@Html.AntiForgeryToken()
-</form>
+<main id="main-content">
+	<div id="admin-explanation">
+		<p>
+			This is and admin page <br>
+			Congratulations! <br>
+			You have found it! <br>
+			Now go away.
+		</p>
+	</div>
+
+	<div id="search-user">
+		<form method="post">
+			<label>Delete user</label><br>
+			<input type="number" id="userId" name="userId"><br>
+			<input type="submit" value="Submit user Id" class="submit-button"><br>
+			@Html.AntiForgeryToken()
+		</form>
+	</div>
+</main>

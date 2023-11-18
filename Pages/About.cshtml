@@ -7,15 +7,10 @@
 }
 <link rel="stylesheet" type="text/css" href="/css/about.css">
 
-<div class="main-div">
-	<div class="text-content">
-		<p class="title-div">This is the about page</p>
-		<p>How enlightening</p>
-	</div>
-	<div class="username-form">
-		<form method="post" autocomplete="off" title="UserNameForm">
-			<label for="uName">Name</label> <br>
-			<input type="text" id="uName" name="uName"><br>
+<div class="about-content">
+	<div id="username-form">
+		<form method="post" autocomplete="off" id="username-submit-form">
+			<input type="text" id="uName" placeholder="Username"><br>
 			<input type="submit" value="Submit user name" class="submit-button"><br>
 			@Html.AntiForgeryToken()
 		</form>

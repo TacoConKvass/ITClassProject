@@ -1,0 +1,41 @@
+#main-content {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: space-evenly;
+}
+
+#search-user {
+    text-align: center;
+    line-height: 30px;
+}
+
+#admin-explanation {
+    font-size: 13px;
+    width: 20%;
+}
+
+#header-div {
+    width: 100%;
+    text-align: center;
+    font-family: Arial;
+    font-size: 20px;
+    background-color: rgba(190, 190, 190, 1);
+    padding: 5px;
+}
+
+#footer {
+    width: 100%;
+    offset-position: top 100px;
+    background-color: rgba(190, 190, 190, 1);
+    height: 30px;
+}
+
+div#admin-explanation, div#search-user {
+    display: inline-flex;
+    align-content: center;
+    align-items: center;
+    margin: 4px;
+}
