@@ -1,0 +1,26 @@
+@page "/search"
+@model ITClassProject.Pages.SearchModel
+@{
+	bool Admin = ITClassProject.Admin.GetInstance().isAdmin;
+	ViewData["Title"] = "Search";
+	Layout = "_Layout";
+	if (Admin)
+	{
+		Layout = "_AdminLayout";
+	}
+}
+<link rel="stylesheet" type="text/css" href="/css/search.css">
+
+<main id="main-content">
+	<div id="search-explanation">
+		Shaboing
+	</div>
+	<div id="search-form">
+		<form method="get">
+			<input type="search" name="q" id="q" placeholder="Search...">
+			<button type="submit">
+				<img src="https://cdn-icons-png.flaticon.com/512/145/145471.png" width="10">
+			</button>
+		</form>
+	</div>
+</main>

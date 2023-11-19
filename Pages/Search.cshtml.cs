@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ITClassProject.Pages
 {
-    public class IndexModel : PageModel
+    public class SearchModel : PageModel
     {
-		public Admin adminInstance = Admin.GetInstance();
-		public void OnGet() {
+        public void OnGet()
+        {
         }
     }
 }

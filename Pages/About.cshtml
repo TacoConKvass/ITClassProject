@@ -2,17 +2,23 @@
 @model ITClassProject.Pages.AboutModel
 
 @{
-    ViewData["Title"] = "TEMP";
-    Layout = "_Layout";
+	bool Admin = ITClassProject.Admin.GetInstance().isAdmin;
+	ViewData["Title"] = "Search";
+	Layout = "_Layout";
+	if (Admin)
+	{
+		Layout = "_AdminLayout";
+	}
 }
 <link rel="stylesheet" type="text/css" href="/css/about.css">
 
-<div class="about-content">
+<main id="main-content">
 	<div id="username-form">
 		<form method="post" autocomplete="off" id="username-submit-form">
-			<input type="text" id="uName" placeholder="Username"><br>
+			<label>Submit username to the database</label></br>
+			<input type="text" id="uName" placeholder="Username" name="uName"><br>
 			<input type="submit" value="Submit user name" class="submit-button"><br>
 			@Html.AntiForgeryToken()
 		</form>
 	</div>
-</div>
+</main>

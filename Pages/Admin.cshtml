@@ -5,22 +5,28 @@
 	Layout = "_AdminLayout";
 }
 
-<main id="main-content">
-	<div id="admin-explanation">
-		<p>
-			This is and admin page <br>
-			Congratulations! <br>
-			You have found it! <br>
-			Now go away.
-		</p>
-	</div>
+@{
+	bool Admin = ITClassProject.Admin.GetInstance().isAdmin;
+	if (Admin)
+	{
+		<main id="main-content">
+			<div id="admin-explanation">
+				<p>
+					This is and admin page <br>
+					Congratulations! <br>
+					You have found it! <br>
+					Now go away.
+				</p>
+			</div>
 
-	<div id="search-user">
-		<form method="post">
-			<label>Delete user</label><br>
-			<input type="number" id="userId" name="userId"><br>
-			<input type="submit" value="Submit user Id" class="submit-button"><br>
-			@Html.AntiForgeryToken()
-		</form>
-	</div>
-</main>
+			<div id="search-user">
+				<form method="post">
+					<label>Delete user</label><br>
+					<input type="number" id="userId" name="userId"><br>
+					<input type="submit" value="Submit user Id" class="submit-button"><br>
+					@Html.AntiForgeryToken()
+				</form>
+			</div>
+		</main>
+	}
+}

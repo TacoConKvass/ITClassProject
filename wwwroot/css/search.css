@@ -1,0 +1,8 @@
+div#search-form, div#search-explanation {
+    height: 50px;
+    display: inline-flex;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    margin: 5px;
+}

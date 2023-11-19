@@ -1,0 +1,13 @@
+@page "/admin-login"
+@model ITClassProject.Pages.AdminLoginModel
+@{
+	Layout = "_Layout";
+}
+
+<main id="main-content">
+	<form method="post" autocomplete="off">
+		<input type="text" placeholder="Password" id="password" name="password"><br>
+		<input type="submit" value="Log in">
+		@Html.AntiForgeryToken()
+	</form>
+</main>

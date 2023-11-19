@@ -1,9 +1,14 @@
-﻿@page "/"
+@page "/"
 @model ITClassProject.Pages.IndexModel
 
 @{
-    ViewData["Title"] = "TEMP";
-    Layout = "_Layout";
+	bool Admin = ITClassProject.Admin.GetInstance().isAdmin;
+	ViewData["Title"] = "Search";
+	Layout = "_Layout";
+	if (Admin)
+	{
+		Layout = "_AdminLayout";
+	}
 }
 
 <div>
