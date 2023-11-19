@@ -7,6 +7,14 @@ div#header-div {
     padding: 5px;
 }
 
+div#no-access {
+    text-align: center;
+}
+
+h1#no-access {
+    color: rgba(255, 100, 100, 1);
+}
+
 #footer {
     offset-position: top 100px;
     background-color: rgba(190, 190, 190, 1);

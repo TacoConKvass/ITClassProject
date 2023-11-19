@@ -1,14 +1,17 @@
 @page "/admin"
 @model ITClassProject.Pages.AdminModel
 @{
-	ViewData["Title"] = "ADMIN";
-	Layout = "_AdminLayout";
+	bool Admin = ITClassProject.Admin.GetInstance().isAdmin;
+	ViewData["Title"] = "Admin";
+	Layout = "_Layout";
+	if (Admin)
+	{
+		Layout = "_AdminLayout";
+	}
 }
 
 @{
-	bool Admin = ITClassProject.Admin.GetInstance().isAdmin;
-	if (Admin)
-	{
+	if (Admin) {
 		<main id="main-content">
 			<div id="admin-explanation">
 				<p>
@@ -26,6 +29,13 @@
 					<input type="submit" value="Submit user Id" class="submit-button"><br>
 					@Html.AntiForgeryToken()
 				</form>
+			</div>
+		</main>
+	}
+	else {
+		<main id="main-content">
+			<div id="no-access">
+				<h1 id="no-access">You do not have access to this page</h1>
 			</div>
 		</main>
 	}

@@ -24,7 +24,7 @@ namespace ITClassProject.Pages
 			}
 
 			adminInstance.isAdmin = true;
-			RedirectToPage("/admin");
+			Response.Redirect("/admin");
 		}
 	}
 }
