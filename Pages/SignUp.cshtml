@@ -1,7 +1,7 @@
-@page "/login"
-@model ITClassProject.Pages.AdminLoginModel
+@page "/sign-up"
+@model ITClassProject.Pages.SignUpModel
 @{
-	ViewData["Title"] = "Login";
+	ViewData["Title"] = "Sign up";
 	Layout = "_Layout";
 }
 
@@ -9,7 +9,8 @@
 	<form method="post" autocomplete="off">
 		<input type="text" placeholder="Username" id="username" name="username" maxlength="20"><br>
 		<input type="text" placeholder="Password" id="password" name="password"><br>
-		<input type="submit" value="Log in">
+		<input type="text" placeholder="Repeat password" id="rpassword" name="rpassword"><br>
+		<input type="submit" value="Sign up">
 		@Html.AntiForgeryToken()
 	</form>
 </main>

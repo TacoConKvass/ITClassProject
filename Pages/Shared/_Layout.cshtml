@@ -8,9 +8,7 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" type="text/css" href="/css/layout.css">
 	@{
-		bool Admin = ITClassProject.LoggedInUser.GetInstance().isAdmin;
-		if (Admin)
-		{
+		if (ITClassProject.LoggedInUser.GetInstance().isAdmin) {
 			<link rel="stylesheet" type="text/css" href="/css/admin.css">
 		}
 	}
@@ -20,18 +18,18 @@
     <div id="header-div">
         <a href="/">Main</a>
          | 
-        <a href="/about">About</a>
-		 | 
 		<a href="/search">Search</a>
 		@{
-			bool isAdmin = ITClassProject.LoggedInUser.GetInstance().isAdmin;
-			if (isAdmin) {
+			if (ITClassProject.LoggedInUser.GetInstance().isAdmin) {
 				<text> | </text>
 				<a href="/admin">Admin</a>
 			}
-			else {
+			if (ITClassProject.LoggedInUser.GetInstance().username == "Guest")
+			{
 				<text> | </text>
-				<a href="/admin-login">Admin Login</a>
+				<a href = "/sign-up" > Sign up </a>
+				<text> | </text>
+				<a href = "/login" > Log in </a>
 			}
 		}
     </div>

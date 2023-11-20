@@ -5,20 +5,16 @@ public sealed class LoggedInUser
 	private LoggedInUser() {
 		isAdmin = false;
 		username = "Guest";
-		dateOfBirth = DateOnly.FromDateTime(DateTime.Now);
-		dateOfJoining = DateOnly.FromDateTime(DateTime.Now);
 	}
 
 	public bool isAdmin;
 	public string username;
-	public DateOnly dateOfBirth;
-	public DateOnly dateOfJoining;
-	private static LoggedInUser _instance;
+	private static LoggedInUser Instance;
 
 	public static LoggedInUser GetInstance() {
-		if (_instance is null) {
-			_instance = new LoggedInUser();
+		if (Instance is null) {
+			Instance = new LoggedInUser();
 		}
-		return _instance;
+		return Instance;
 	}
 }

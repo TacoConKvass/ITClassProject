@@ -5,7 +5,7 @@ namespace ITClassProject.Pages
 {
     public class IndexModel : PageModel
     {
-		public Admin adminInstance = Admin.GetInstance();
+		public LoggedInUser userInstance = LoggedInUser.GetInstance();
 		public void OnGet() {
         }
     }
