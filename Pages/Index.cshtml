@@ -2,13 +2,9 @@
 @model ITClassProject.Pages.IndexModel
 
 @{
-	bool Admin = ITClassProject.Admin.GetInstance().isAdmin;
+	bool Admin = ITClassProject.LoggedInUser.GetInstance().isAdmin;
 	ViewData["Title"] = "Search";
 	Layout = "_Layout";
-	if (Admin)
-	{
-		Layout = "_AdminLayout";
-	}
 }
 
 <div>

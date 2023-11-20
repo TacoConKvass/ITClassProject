@@ -6,24 +6,22 @@ namespace ITClassProject.Pages
 {
     public class AdminLoginModel : PageModel
     {
-		public Admin adminInstance = Admin.GetInstance();
+		public LoggedInUser userInstance = LoggedInUser.GetInstance();
+
 		public void OnGet() {
-        }
+        
+		}
 
 		public void OnPost() {
 			Console.WriteLine("Post");
+			string username = Request.Form["username"].ToString();
 			string password = Request.Form["password"].ToString();
 			if (password is null) {
 				Console.WriteLine("Pass is null");
 				return;
 			}
 
-			if (!Admin.CheckPassword(password)) {
-				Console.WriteLine("Wrong password");
-				return;
-			}
-
-			adminInstance.isAdmin = true;
+			
 			Response.Redirect("/admin");
 		}
 	}

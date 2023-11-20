@@ -7,6 +7,13 @@
 	}
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" type="text/css" href="/css/layout.css">
+	@{
+		bool Admin = ITClassProject.LoggedInUser.GetInstance().isAdmin;
+		if (Admin)
+		{
+			<link rel="stylesheet" type="text/css" href="/css/admin.css">
+		}
+	}
 </head>
 
 <body>
@@ -16,8 +23,17 @@
         <a href="/about">About</a>
 		 | 
 		<a href="/search">Search</a>
-		 | 
-		<a href="/admin-login">Admin Login</a>
+		@{
+			bool isAdmin = ITClassProject.LoggedInUser.GetInstance().isAdmin;
+			if (isAdmin) {
+				<text> | </text>
+				<a href="/admin">Admin</a>
+			}
+			else {
+				<text> | </text>
+				<a href="/admin-login">Admin Login</a>
+			}
+		}
     </div>
 
     @RenderBody()

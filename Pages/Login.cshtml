@@ -1,12 +1,13 @@
-@page "/admin-login"
+@page "/login"
 @model ITClassProject.Pages.AdminLoginModel
 @{
-	ViewData["Title"] = "Admin Login";
+	ViewData["Title"] = "Login";
 	Layout = "_Layout";
 }
 
 <main id="main-content">
 	<form method="post" autocomplete="off">
+		<input type="text" placeholder="Username" id="username" name="usernam" maxlength="20"><br>
 		<input type="text" placeholder="Password" id="password" name="password"><br>
 		<input type="submit" value="Log in">
 		@Html.AntiForgeryToken()

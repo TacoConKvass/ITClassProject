@@ -10,10 +10,13 @@ public class UserDbContext
 		using (MySqlConnection conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
 			MySqlCommand mySqlCommand = new MySqlCommand("""
-				CREATE TABLE IF NOT EXISTS `userDb` (
-				  `id` INT NOT NULL AUTO_INCREMENT,
-				  `name` VARCHAR(255),
-				  PRIMARY KEY (`id`)
+				CREATE TABLE IF NOT EXISTS `users` (
+				  `name` VARCHAR(20),
+				  `password` VARCHAR(255),
+				  `dateOfBirth` DATE,
+				  `dateOfJoining` DATE,
+				  `
+				  PRIMARY KEY (`name`)
 				);
 			""", conn);
 			mySqlCommand.ExecuteNonQuery();
