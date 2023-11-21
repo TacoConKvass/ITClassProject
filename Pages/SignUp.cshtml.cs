@@ -1,14 +1,11 @@
 using ITClassProject.Database;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using ITClassProject.Pages.Shared;
 
 namespace ITClassProject.Pages
 {
-    public class SignUpModel : PageModel
+    public class SignUpModel : _PageModel
     {
 		public UserDbContext dbContext = new UserDbContext();
-        public void OnGet() {
-        }
 
 		public void OnPost() {
 			string username  = Request.Form["username"].ToString();
@@ -74,9 +71,8 @@ namespace ITClassProject.Pages
 			}
 
 			dbContext.AddRecord(username, password);
-			LoggedInUser userInstance = LoggedInUser.GetInstance();
-			userInstance.username = username;
-			userInstance.isAdmin = false;
+			TempData["username"] = username;
+			TempData["isAdmin"] = 0;
 			Response.Redirect("/");
 		}
 	}

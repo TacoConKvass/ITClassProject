@@ -1,5 +1,3 @@
-using System.ComponentModel;
-
 namespace ITClassProject;
 
 public static class Config

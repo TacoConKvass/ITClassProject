@@ -34,7 +34,7 @@ public class UserDbContext
 				result.Password = reader.GetString("password");
 				result.JoinDate = reader.GetDateOnly("dateOfJoining");
 				result.PhotoUrl = reader.GetString("photoUrl");
-				result.IsAdmin = reader.GetBoolean("admin");
+				result.IsAdmin = reader.GetInt32("admin");
 				users.Add(result);
 			}
 
@@ -45,7 +45,7 @@ public class UserDbContext
 	public void AddRecord(string Name, string Password) {
 		using (MySqlConnection conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			MySqlCommand mySqlCommand = new MySqlCommand($"INSERT INTO users (`name`, `password`, `dateOfJoining`, `photoUrl`, `admin`) VALUES ('{Name}', '{Password}', {DateOnly.FromDateTime(DateTime.Today)}, '', 0);", conn);
+			MySqlCommand mySqlCommand = new MySqlCommand($"INSERT INTO users (`name`, `password`, `dateOfJoining`, `photoUrl`, `admin`) VALUES ('{Name}', '{Password}', NOW(), '', 0);", conn);
 			mySqlCommand.ExecuteNonQuery();
 		}
 	}
@@ -70,7 +70,7 @@ public class UserDbContext
 				user.Password = reader.GetString("password");
 				user.JoinDate = reader.GetDateOnly("dateOfJoining");
 				user.PhotoUrl = reader.GetString("photoUrl");
-				user.IsAdmin  = reader.GetBoolean("admin");
+				user.IsAdmin  = reader.GetInt32("admin");
 			}
 		}
 		return user;

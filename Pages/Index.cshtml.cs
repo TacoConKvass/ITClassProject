@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ITClassProject.Pages.Shared;
 
 namespace ITClassProject.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : _PageModel
     {
-		public LoggedInUser userInstance = LoggedInUser.GetInstance();
-		public void OnGet() {
-        }
     }
 }

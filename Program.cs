@@ -6,11 +6,16 @@ builder.Services.AddRazorPages();
 builder.Services.AddTransient<MySqlConnection>(_ =>
     new MySqlConnection(Config.ConnectionString));
 
+builder.Services.AddSession(options => {
+	options.IdleTimeout = TimeSpan.FromSeconds(10);
+});
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseSession();
 
 app.MapRazorPages();
 

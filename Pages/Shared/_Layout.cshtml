@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-	@{
-		ViewData["Layout"] = "_Layout";
-	}
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" type="text/css" href="/css/layout.css">
 	@{
-		if (ITClassProject.LoggedInUser.GetInstance().isAdmin) {
+		ViewData["Layout"] = "_Layout";
+		if (Model.admin) {
 			<link rel="stylesheet" type="text/css" href="/css/admin.css">
 		}
 	}
@@ -20,11 +18,11 @@
          | 
 		<a href="/search">Search</a>
 		@{
-			if (ITClassProject.LoggedInUser.GetInstance().isAdmin) {
+			if (Model.admin) {
 				<text> | </text>
 				<a href="/admin">Admin</a>
 			}
-			if (ITClassProject.LoggedInUser.GetInstance().username == "Guest")
+			if (Model.currentUsername == "Guest")
 			{
 				<text> | </text>
 				<a href = "/sign-up" > Sign up </a>

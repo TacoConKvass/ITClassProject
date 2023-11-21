@@ -1,17 +1,11 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using ITClassProject.Pages.Shared;
 using ITClassProject.Database;
 
 namespace ITClassProject.Pages
 {
-    public class AdminLoginModel : PageModel
+    public class AdminLoginModel : _PageModel
     {
-		public LoggedInUser userInstance = LoggedInUser.GetInstance();
-
-		public void OnGet() {
-			UserDbContext userDb = new UserDbContext();
-			User foundUser = userDb.FindRecord("Pronto");
-		}
-
+		UserDbContext userDb = new UserDbContext();
 		public void OnPost() {
 			string username = Request.Form["username"].ToString();
 			string password = Request.Form["password"].ToString();
@@ -37,11 +31,12 @@ namespace ITClassProject.Pages
 				return;
 			}
 
-			var loggedInUser = LoggedInUser.GetInstance();
-			loggedInUser.username = foundUser.Username;
-			loggedInUser.isAdmin = foundUser.IsAdmin;
+			TempData["username"] = foundUser.Username;
+			TempData["isAdmin"] = foundUser.IsAdmin;
+			Console.WriteLine(foundUser.Username + "\t" + foundUser.IsAdmin.ToString());
 
-			if (loggedInUser.isAdmin) {
+
+			if (foundUser.IsAdmin == 1) {
 				Response.Redirect("/admin");
 				return;
 			}

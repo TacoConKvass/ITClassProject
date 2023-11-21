@@ -6,6 +6,6 @@ public class User
 	public string Password { get; set; }
 	public DateOnly JoinDate { get; set; }
 	public string PhotoUrl { get; set; }
-	public bool IsAdmin { get; set; }
+	public int IsAdmin { get; set; }
 }
 

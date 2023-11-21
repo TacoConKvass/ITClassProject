@@ -1,19 +1,13 @@
 using ITClassProject.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ITClassProject.Pages.Shared;
 
 namespace ITClassProject.Pages
 {
-    public class AdminModel : PageModel
+    public class AdminModel : _PageModel
     {
-		public enum Actions {
-			Delete,
-			Show
-		}
-
 		UserDbContext context = new UserDbContext();
-		public void OnGet() {
-        }
 
 		public void OnPost() {
 		}
