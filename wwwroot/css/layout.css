@@ -22,6 +22,10 @@ h1#no-access {
     height: 30px;
 }
 
+form#sign-out {
+    display: inline-flex;
+}
+
 main#main-content {
     text-align: center;
     display: flex;
@@ -33,4 +37,8 @@ main#main-content {
 
 body {
     margin: 0px;
+}
+
+#password {
+    -webkit-text-security: disc;
 }

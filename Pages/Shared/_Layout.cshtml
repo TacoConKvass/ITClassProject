@@ -22,12 +22,15 @@
 				<text> | </text>
 				<a href="/admin">Admin</a>
 			}
-			if (Model.currentUsername == "Guest")
-			{
+			if (Model.currentUsername == "Guest") {
 				<text> | </text>
 				<a href = "/sign-up" > Sign up </a>
 				<text> | </text>
 				<a href = "/login" > Log in </a>
+			}
+			else {
+				<text> | </text>
+				<a href="/sign-out">Sign Out</a>
 			}
 		}
     </div>

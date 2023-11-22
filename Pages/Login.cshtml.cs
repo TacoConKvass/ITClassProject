@@ -6,16 +6,26 @@ namespace ITClassProject.Pages
     public class AdminLoginModel : _PageModel
     {
 		UserDbContext userDb = new UserDbContext();
+		public bool usernameNull = false;
+		public bool passwordNull = false;
+		public bool userNotFound = false;
+		public bool passwordCorrect = false;
 		public void OnPost() {
+			usernameNull = false;
+			passwordNull = false;
+			userNotFound = false;
+			passwordCorrect = false;
 			string username = Request.Form["username"].ToString();
 			string password = Request.Form["password"].ToString();
 			if (string.IsNullOrEmpty(password)) {
 				Console.WriteLine("Pass is null, empty or whitespace");
+				passwordNull = true;
 				return;
 			}
 
 			if (string.IsNullOrEmpty(username)) {
 				Console.WriteLine("Username is null, empty or whitespace");
+				usernameNull = true;
 				return;
 			}
 
@@ -23,11 +33,13 @@ namespace ITClassProject.Pages
 			User foundUser = userDb.FindRecord(username);
 			if (foundUser.Username is null) {
 				Console.WriteLine("No user with this username found");
+				userNotFound = true;
 				return;
 			}
 
 			if (!foundUser.Password.Equals(password)) {
 				Console.WriteLine("Wrong password");
+				passwordCorrect = true;
 				return;
 			}
 
