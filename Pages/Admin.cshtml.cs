@@ -10,6 +10,9 @@ namespace ITClassProject.Pages
 		UserDbContext context = new UserDbContext();
 
 		public void OnPost() {
+			var userForDeletion = Request.Form["usernameForDeletion"].ToString();
+			context.RemoveRecord(userForDeletion);
+			Response.Redirect("/admin");
 		}
 	}
 }

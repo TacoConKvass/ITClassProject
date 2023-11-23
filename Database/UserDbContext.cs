@@ -80,13 +80,9 @@ public class UserDbContext
 		int result = 0;
 		using (MySqlConnection conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			MySqlCommand mySqlCommand = new MySqlCommand("SELECT COUNT(*) AS num FROM users WHERE name=@Username", conn);
-			mySqlCommand.Parameters.AddWithValue("name", Username);
+			MySqlCommand mySqlCommand = new MySqlCommand($"SELECT COUNT(*) AS num FROM users WHERE name= '{Username}'", conn);
 
-			var reader = mySqlCommand.ExecuteReader();
-			while (reader.Read()) {
-				result = reader.GetInt32("num");
-			}
+			result = int.Parse(mySqlCommand.ExecuteScalar().ToString());
 		}
 
 		return result;

@@ -57,6 +57,7 @@ namespace ITClassProject.Pages
 				return;
 			}
 
+			Console.WriteLine(dbContext.FindAppeareanceCount(username).ToString());
 			if (username == "Guest" || dbContext.FindAppeareanceCount(username) != 0) {
 				Console.WriteLine("Username can't be 'Guest'");
 				nonuniqueName = true;
