@@ -6,30 +6,32 @@
 }
 
 <main id="main-content">
-	@{
-		if (Model.usernameNull)
-		{
-			<h1>Username can't be empty!</h1>
-		}
-
-		if (Model.passwordNull)
-		{
-			<h1>Password can't be empty</h1>
-		}
-
-		if (Model.userNotFound)
-		{
-			<h1>User with given name not found!</h1>
-		}
-
-		if (Model.passwordCorrect)
-		{
-			<h1>Wrong password</h1>
-		}
-	}
 	<form method="post" autocomplete="off">
+		<div id="warning">
+			@{
+				if (Model.usernameNull)
+				{
+					<text>Username can't be empty!</text>
+				}
+
+				if (Model.passwordNull)
+				{
+					<text>Password can't be empty!</text>
+				}
+
+				if (Model.userNotFound)
+				{
+					<text>User with given username not found!</text>
+				}
+
+				if (Model.passwordIncorrect)
+				{
+					<text>Wrong password!</text>
+				}
+			}
+		</div>
 		<input type="text" placeholder="Username" id="username" name="username" maxlength="20"><br>
-		<input type="text" placeholder="Password" id="password" name="password"><br>
+		<input type="password" placeholder="Password" id="password" name="password"><br>
 		<input type="submit" value="Log in">
 		@Html.AntiForgeryToken()
 	</form>

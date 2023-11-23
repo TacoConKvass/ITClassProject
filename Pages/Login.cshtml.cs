@@ -9,23 +9,24 @@ namespace ITClassProject.Pages
 		public bool usernameNull = false;
 		public bool passwordNull = false;
 		public bool userNotFound = false;
-		public bool passwordCorrect = false;
+		public bool passwordIncorrect = false;
 		public void OnPost() {
 			usernameNull = false;
 			passwordNull = false;
 			userNotFound = false;
-			passwordCorrect = false;
+			passwordIncorrect = false;
 			string username = Request.Form["username"].ToString();
 			string password = Request.Form["password"].ToString();
-			if (string.IsNullOrEmpty(password)) {
-				Console.WriteLine("Pass is null, empty or whitespace");
-				passwordNull = true;
-				return;
-			}
 
 			if (string.IsNullOrEmpty(username)) {
 				Console.WriteLine("Username is null, empty or whitespace");
 				usernameNull = true;
+				return;
+			}
+
+			if (string.IsNullOrEmpty(password)) {
+				Console.WriteLine("Pass is null, empty or whitespace");
+				passwordNull = true;
 				return;
 			}
 
@@ -39,7 +40,7 @@ namespace ITClassProject.Pages
 
 			if (!foundUser.Password.Equals(password)) {
 				Console.WriteLine("Wrong password");
-				passwordCorrect = true;
+				passwordIncorrect = true;
 				return;
 			}
 
