@@ -6,11 +6,100 @@
 }
 
 <main id="main-content">
-	<form method="post" autocomplete="off">
-		<input type="text" placeholder="Username" id="username" name="username" maxlength="20"><br>
-		<input type="text" placeholder="Password" id="password" name="password"><br>
-		<input type="text" placeholder="Repeat password" id="rpassword" name="rpassword"><br>
-		<input type="submit" value="Sign up">
-		@Html.AntiForgeryToken()
-	</form>
+	<div style="width:100%; color:darkred;">
+		@{
+			if (Model.usernameNull)
+			{
+				<text>Username can't be empty!</text>
+			}
+
+			if (Model.passwordNull)
+			{
+				<text>Password can't be empty!</text>
+			}
+
+			if (Model.rpasswordNull)
+			{
+				<text>Repeated password can't be empty!</text>
+			}
+
+			if (Model.nonuniqueName)
+			{
+				<text>Username taken!</text>
+			}
+
+			if (Model.usernameTooLong)
+			{
+				<text>Username must be 19 characters or shorter!</text>
+			}
+
+			if (Model.passwordWrongLen)
+			{
+				<text>
+					Password must be between 8 to 254 characters and contain at least one number and one of the following: <br>
+					#, $, ^, &, *, +, =, -, _
+				</text>
+			}
+
+			if (Model.noSpecialChars)
+			{
+				<text>
+					Password must contain at least one of the following: <br>
+					#, $, ^, &, *, +, =, -, _
+				</text>
+			}
+
+			if (Model.noNnums)
+			{
+				<text>Password must contain at least one number!</text>
+			}
+
+			if (Model.notMatching)
+			{
+				<text>Passwords don't match!</text>
+			}
+
+		}
+	</div>
+
+	<div style="display:inline-flex; flex-direction:row;">
+		<div style="line-height:30px;">
+			<form method="post" autocomplete="off">
+				<input type="text" placeholder="Username" id="username" name="username" maxlength="20"><br>
+				<input type="password" placeholder="Password" id="password" name="password" class="js-password"><br>
+				<input type="password" placeholder="Repeat password" id="rpassword" name="rpassword" class="js-password"><br>
+				<input type="submit" value="Sign up" class="js-login">
+				@Html.AntiForgeryToken()
+			</form>
+		</div>
+
+		<div style="display:flex; align-items:center; justify-content:center; height:92px;">
+			<button class="js-eye" type="button">
+				<img src="https://cdn-icons-png.flaticon.com/512/65/65000.png" width="10" height="10" />
+			</button>
+		</div>
+	</div>
 </main>
+
+<script hidden>
+	let visible = false;
+	const visibilityToggle = document.getElementsByClassName('js-eye')[0];
+	const loginButton = document.getElementsByClassName('js-login')[0];
+	const passwordField = document.getElementsByClassName('js-password')[0];
+	const rpasswordField = document.getElementsByClassName('js-password')[1];
+
+	visibilityToggle.addEventListener('click', togglePasswordMask);
+	loginButton.addEventListener('click', forceHidePassword);
+
+	function togglePasswordMask() {
+		visible = !visible;
+		const passwordType = visible ? 'text' : 'password';
+		passwordField.type = passwordType;
+		rpasswordField.type = passwordType;
+	}
+
+	function forceHidePassword() {
+		passwordField.type = 'password';
+		rpasswordField.type = 'password';
+	}
+</script>

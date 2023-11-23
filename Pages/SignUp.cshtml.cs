@@ -7,38 +7,70 @@ namespace ITClassProject.Pages
     {
 		public UserDbContext dbContext = new UserDbContext();
 
+		public bool usernameNull = false;
+		public bool passwordNull = false;
+		public bool rpasswordNull = false;
+		public bool nonuniqueName = false;
+		public bool usernameTooLong = false;
+		public bool passwordWrongLen = false;
+		public bool noSpecialChars = false;
+		public bool noNnums = false;
+		public bool notMatching = false;
+
 		public void OnPost() {
+			usernameNull = false;
+			passwordNull = false;
+			rpasswordNull = false;
+			nonuniqueName = false;
+			usernameTooLong = false;
+			passwordWrongLen = false;
+			noSpecialChars = false;
+			noNnums = false;
+			notMatching = false;
+
 			string username  = Request.Form["username"].ToString();
 			string password  = Request.Form["password"].ToString();
 			string rpassword = Request.Form["rpassword"].ToString();
 
-			if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(rpassword) ) {
-				Console.WriteLine($"One of the parameters is either null, empty or a whitespace: {string.IsNullOrEmpty(username)}, {string.IsNullOrEmpty(password)}, {string.IsNullOrEmpty(rpassword)}");
+			if (string.IsNullOrEmpty(username)) {
+				Console.WriteLine("Username is null or empty");
+				usernameNull = true;
 				return;
 			}
+
+			if (string.IsNullOrEmpty(password)) {
+				Console.WriteLine("Password is null or empty");
+				passwordNull = true;
+				return;
+			}
+
+			if (string.IsNullOrEmpty(rpassword)) {
+				Console.WriteLine("Rpassword is null or empty");
+				rpasswordNull = true;
+				return;
+			}
+
 
 			if (username.Length >= 20) {
 				Console.WriteLine("Username too long, should be 19 characters or less");
+				usernameTooLong = true;
 				return;
 			}
 
-			if (username == "Guest") {
+			if (username == "Guest" || dbContext.FindAppeareanceCount(username) != 0) {
 				Console.WriteLine("Username can't be 'Guest'");
+				nonuniqueName = true;
 				return;
 			}
 
-			if (password.Length >= 255) {
-				Console.WriteLine("Password too long");
-				return;
-			}
-
-			if (password.Length < 8) {
-				Console.WriteLine("Password too short");
+			if (password.Length >= 255 || password.Length < 8) {
+				Console.WriteLine("Password too long or too short");
+				passwordWrongLen = true;
 				return;
 			}
 
 			bool containsSpecialChar = false;
-			List<char> specialChars = new List<char>() { '@', '#', '$', '^', '&', '*', '+', '=', '-', '_' };
+			List<char> specialChars = new List<char>() { '#', '$', '^', '&', '*', '+', '=', '-', '_' };
 			foreach (char c in specialChars) {
 				if (password.Contains(c)) {
 					containsSpecialChar = true;
@@ -47,7 +79,8 @@ namespace ITClassProject.Pages
 			}
 
 			if (!containsSpecialChar) {
-				Console.WriteLine("Password needs to contain at least one of these: @, #, $, ^, &, *, +, =, -, _");
+				Console.WriteLine("Password needs to contain at least one of these: #, $, ^, &, *, +, =, -, _");
+				noSpecialChars = true;
 				return;
 			}
 
@@ -62,11 +95,13 @@ namespace ITClassProject.Pages
 
 			if (!containsNumber) {
 				Console.WriteLine("Password needs to contain at least one number");
+				noNnums = true;
 				return;
 			}
 
 			if (!rpassword.Equals(password)) {
 				Console.WriteLine("Passwords dont match");
+				notMatching = true;
 				return;
 			}
 

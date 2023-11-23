@@ -38,7 +38,3 @@ main#main-content {
 body {
     margin: 0px;
 }
-
-#password {
-    -webkit-text-security: disc;
-}

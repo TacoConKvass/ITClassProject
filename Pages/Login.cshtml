@@ -4,9 +4,11 @@
 	ViewData["Title"] = "Login";
 	Layout = "_Layout";
 }
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+
 
 <main id="main-content">
-	<form method="post" autocomplete="off">
+	<div>
 		<div id="warning">
 			@{
 				if (Model.usernameNull)
@@ -30,9 +32,39 @@
 				}
 			}
 		</div>
-		<input type="text" placeholder="Username" id="username" name="username" maxlength="20"><br>
-		<input type="password" placeholder="Password" id="password" name="password"><br>
-		<input type="submit" value="Log in">
-		@Html.AntiForgeryToken()
-	</form>
+
+		<div style="display:inline-flex; flex-direction:row; line-height:30px;">
+			<form method="post" autocomplete="off">
+				<input type="text" placeholder="Username" id="username" name="username" maxlength="20"><br>
+				<input type="password" placeholder="Password" class="js-password" name="password"><br>
+				<input type="submit" value="Log in" class="js-login">
+				@Html.AntiForgeryToken()
+			</form>
+			<div style="display:flex; align-items:center; justify-content:center; height:92px;">
+				<button class="js-eye" type="button">
+					<img src="https://cdn-icons-png.flaticon.com/512/65/65000.png" width="10" height="10" />
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<script hidden="hidden">
+		let visible = false;
+		const visibilityToggle = document.getElementsByClassName('js-eye')[0];
+		const loginButton = document.getElementsByClassName('js-login')[0];
+		const passwordField = document.getElementsByClassName('js-password')[0];
+
+		visibilityToggle.addEventListener('click', togglePasswordMask);
+		loginButton.addEventListener('click', forceHidePassword);
+
+		function togglePasswordMask() {
+			visible = !visible;
+			const passwordType = visible ? 'text' : 'password';
+			passwordField.type = passwordType;
+		}
+
+		function forceHidePassword() {
+			passwordField.type = 'password';
+		}
+	</script>
 </main>
