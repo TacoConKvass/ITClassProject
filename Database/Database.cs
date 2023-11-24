@@ -4,17 +4,20 @@ namespace ITClassProject.Database;
 
 public static class Database {
 	private static UserDbContext? userDb;
-	//private static QuoteDbContext? quoteDb;
+	private static QuoteDbContext? quoteDb;
 
 	public static UserDbContext GetUserDbContext() {
-		userDb ??= new UserDbContext(); //If userDb is null
+		if (userDb is null) {
+			userDb = new UserDbContext();
+		}
 		return userDb;
 	}
 
-	/*
-	public static QuoteDbContext GetPostDbContext() {
-		quoteDb ??= new QuoteDbContext();
+	public static QuoteDbContext GetQuoteDbContext() {
+		if (quoteDb is null) {
+			quoteDb = new QuoteDbContext();
+		}
 		return quoteDb;
 	}
-	*/
+	
 }

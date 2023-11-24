@@ -7,5 +7,25 @@
 }
 
 <div>
-    <h1>TEST</h1>
+	@{
+		var quotes = ITClassProject.Database.Database.GetQuoteDbContext().GetAllQuotes();
+		quotes.Reverse();
+		foreach (ITClassProject.Database.Models.Quote quote in quotes)
+		{
+			<div>
+				<div>
+					<text>
+						Author: @quote.Author <br>
+						Source: @quote.Source <br>
+					</text>
+				</div>
+
+				<div>
+					<text>
+						@quote.Content
+					</text>
+				</div>
+			</div>
+		}
+	}
 </div>

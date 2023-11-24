@@ -21,6 +21,10 @@ public class UserDbContext
 		}
 	}
 
+	/// <summary>
+	/// Returns all users in a list
+	/// </summary>
+	/// <returns>List<User> - All users in the database/returns>
 	public List<User> GetAllRecords() {
 		using (var conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
@@ -41,6 +45,11 @@ public class UserDbContext
 		}
 	}
 
+	/// <summary>
+	/// Adds a user to the database
+	/// </summary>
+	/// <param name="Name">Username to add</param>
+	/// <param name="Password">Password to add</param>
 	public void AddRecord(string Name, string Password) {
 		using (var conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
@@ -54,6 +63,10 @@ public class UserDbContext
 		}
 	}
 
+	/// <summary>
+	/// Removes given user from the database
+	/// </summary>
+	/// <param name="Username">Username of the user you want to delete</param>
 	public void RemoveRecord(string Username) {
 		using (var conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
@@ -64,6 +77,11 @@ public class UserDbContext
 		}
 	}
 
+	/// <summary>
+	/// Finds the dtabase record with given username
+	/// </summary>
+	/// <param name="Username">User you want to find</param>
+	/// <returns>User - Found user. If user is not found it's values are null</returns>
 	public User FindRecord(string Username) {
 		var user = new User();
 
@@ -85,6 +103,11 @@ public class UserDbContext
 		return user;
 	}
 
+	/// <summary>
+	/// Count how many times this username appears in the database
+	/// </summary>
+	/// <param name="Username">Username</param>
+	/// <returns>int - How many times the username appears in the database</returns>
 	public int FindAppeareanceCount(string Username) {
 		var result = 0;
 		using (var conn = new MySqlConnection(Config.ConnectionString)) {

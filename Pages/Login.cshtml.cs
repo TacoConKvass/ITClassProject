@@ -9,12 +9,10 @@ namespace ITClassProject.Pages
 		public bool usernameNull = false;
 		public bool passwordNull = false;
 		public bool userNotFound = false;
-		public bool passwordIncorrect = false;
 		public void OnPost() {
 			usernameNull = false;
 			passwordNull = false;
 			userNotFound = false;
-			passwordIncorrect = false;
 			string username = Request.Form["username"].ToString();
 			string password = Request.Form["password"].ToString();
 
@@ -31,15 +29,9 @@ namespace ITClassProject.Pages
 			}
 
 			User foundUser = userDb.FindRecord(username);
-			if (foundUser.Username is null) {
+			if (foundUser.Username is null || !foundUser.Password.Equals(password)) {
 				Console.WriteLine("No user with this username found");
 				userNotFound = true;
-				return;
-			}
-
-			if (!foundUser.Password.Equals(password)) {
-				Console.WriteLine("Wrong password");
-				passwordIncorrect = true;
 				return;
 			}
 
