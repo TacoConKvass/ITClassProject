@@ -6,21 +6,36 @@
 
 }
 
-<div>
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+
+<main id="main-content">
 	@{
-		var quotes = ITClassProject.Database.Database.GetQuoteDbContext().GetAllQuotes();
+		var quotesDbContext = ITClassProject.Database.Database.GetQuoteDbContext();
+		var quotes = quotesDbContext.GetAllQuotes();
 		quotes.Reverse();
 		foreach (ITClassProject.Database.Models.Quote quote in quotes)
 		{
-			<div>
-				<div>
-					<text>
-						Author: @quote.Author <br>
-						Source: @quote.Source <br>
-					</text>
+			<div class="quote">
+				<div class="quote-details">
+					<text>Author: @quote.Author </text>
+					<text> | </text>
+					<text> Source: @quote.Source </text>
+					@{
+						if (TempData.Peek("username").ToString() == quote.Author)
+						{
+							<text> | </text>
+							<button type="button">
+								Delete
+							</button>
+							<text> | </text>
+							<button type="button" onclick="">
+								Edit
+							</button>
+						}
+					}
 				</div>
 
-				<div>
+				<div class="quote-content">
 					<text>
 						@quote.Content
 					</text>
@@ -28,4 +43,4 @@
 			</div>
 		}
 	}
-</div>
+</main>
