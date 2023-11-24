@@ -45,7 +45,12 @@ public class UserDbContext
 	public void AddRecord(string Name, string Password) {
 		using (MySqlConnection conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			MySqlCommand mySqlCommand = new MySqlCommand($"INSERT INTO users (`name`, `password`, `dateOfJoining`, `photoUrl`, `admin`) VALUES ('{Name}', '{Password}', NOW(), '', 0);", conn);
+			MySqlCommand mySqlCommand = new MySqlCommand("""
+				INSERT INTO users (`name`, `password`, `dateOfJoining`, `photoUrl`, `admin`)
+				VALUES (@Name, @Password, NOW(), '', 0);
+				""", conn);
+			mySqlCommand.Parameters.AddWithValue("name", Name);
+			mySqlCommand.Parameters.AddWithValue("password", Password);
 			mySqlCommand.ExecuteNonQuery();
 		}
 	}
@@ -53,7 +58,9 @@ public class UserDbContext
 	public void RemoveRecord(string Username) {
 		using (MySqlConnection conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			MySqlCommand mySqlCommand = new MySqlCommand($"DELETE FROM users WHERE name='{Username}';", conn);
+			MySqlCommand mySqlCommand = new MySqlCommand($"DELETE FROM users WHERE `name`=@Name;", conn);
+			mySqlCommand.Parameters.AddWithValue("name", Username);
+
 			mySqlCommand.ExecuteNonQuery();
 		}
 	}
@@ -63,7 +70,9 @@ public class UserDbContext
 
 		using (MySqlConnection conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			MySqlCommand mySqlCommand = new MySqlCommand($"SELECT * FROM users WHERE name='{Username}'", conn);
+			MySqlCommand mySqlCommand = new MySqlCommand("SELECT * FROM users WHERE `name`=@Name", conn);
+			mySqlCommand.Parameters.AddWithValue("name", Username);
+			
 			var reader = mySqlCommand.ExecuteReader();
 			while (reader.Read()) {
 				user.Username = reader.GetString("name");
@@ -71,6 +80,7 @@ public class UserDbContext
 				user.JoinDate = reader.GetDateOnly("dateOfJoining");
 				user.PhotoUrl = reader.GetString("photoUrl");
 				user.IsAdmin  = reader.GetInt32("admin");
+				Console.WriteLine(user);
 			}
 		}
 		return user;
@@ -80,7 +90,8 @@ public class UserDbContext
 		int result = 0;
 		using (MySqlConnection conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			MySqlCommand mySqlCommand = new MySqlCommand($"SELECT COUNT(*) AS num FROM users WHERE name= '{Username}'", conn);
+			MySqlCommand mySqlCommand = new MySqlCommand($"SELECT COUNT(*) AS num FROM users WHERE `name`=@Name", conn);
+			mySqlCommand.Parameters.AddWithValue("name", Username);
 
 			result = int.Parse(mySqlCommand.ExecuteScalar().ToString());
 		}
