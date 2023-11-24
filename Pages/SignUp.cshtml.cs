@@ -1,11 +1,11 @@
-using ITClassProject.Database;
+using ITClassProject.Database.Models;
 using ITClassProject.Pages.Shared;
 
 namespace ITClassProject.Pages
 {
-    public class SignUpModel : _PageModel
+	public class SignUpModel : _PageModel
     {
-		public UserDbContext dbContext = new UserDbContext();
+		UserDbContext userDb = Database.Database.GetUserDbContext();
 
 		public bool usernameNull = false;
 		public bool passwordNull = false;
@@ -57,8 +57,8 @@ namespace ITClassProject.Pages
 				return;
 			}
 
-			Console.WriteLine(dbContext.FindAppeareanceCount(username).ToString());
-			if (username == "Guest" || dbContext.FindAppeareanceCount(username) != 0) {
+			Console.WriteLine(userDb.FindAppeareanceCount(username).ToString());
+			if (username == "Guest" || userDb.FindAppeareanceCount(username) != 0) {
 				Console.WriteLine("Username can't be 'Guest'");
 				nonuniqueName = true;
 				return;
@@ -106,7 +106,7 @@ namespace ITClassProject.Pages
 				return;
 			}
 
-			dbContext.AddRecord(username, password);
+			userDb.AddRecord(username, password);
 			TempData["username"] = username;
 			TempData["isAdmin"] = 0;
 			Response.Redirect("/");

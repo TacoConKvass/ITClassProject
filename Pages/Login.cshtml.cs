@@ -1,11 +1,11 @@
 using ITClassProject.Pages.Shared;
-using ITClassProject.Database;
+using ITClassProject.Database.Models;
 
 namespace ITClassProject.Pages
 {
-    public class AdminLoginModel : _PageModel
+	public class AdminLoginModel : _PageModel
     {
-		UserDbContext userDb = new UserDbContext();
+		UserDbContext userDb = Database.Database.GetUserDbContext();
 		public bool usernameNull = false;
 		public bool passwordNull = false;
 		public bool userNotFound = false;
@@ -30,7 +30,6 @@ namespace ITClassProject.Pages
 				return;
 			}
 
-			UserDbContext userDb = new UserDbContext();
 			User foundUser = userDb.FindRecord(username);
 			if (foundUser.Username is null) {
 				Console.WriteLine("No user with this username found");

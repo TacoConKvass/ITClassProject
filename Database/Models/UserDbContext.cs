@@ -1,14 +1,13 @@
 using MySqlConnector;
-using System.Reflection.PortableExecutable;
 
-namespace ITClassProject.Database;
+namespace ITClassProject.Database.Models;
 
 public class UserDbContext
 {
 	public UserDbContext() {
-		using (MySqlConnection conn = new MySqlConnection(Config.ConnectionString)) {
+		using (var conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			MySqlCommand mySqlCommand = new MySqlCommand("""
+			var mySqlCommand = new MySqlCommand("""
 				CREATE TABLE IF NOT EXISTS `users` (
 				  `name` VARCHAR(20),
 				  `password` VARCHAR(255),
@@ -23,11 +22,11 @@ public class UserDbContext
 	}
 
 	public List<User> GetAllRecords() {
-		using (MySqlConnection conn = new MySqlConnection(Config.ConnectionString)) {
+		using (var conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			MySqlCommand mySqlCommand = new MySqlCommand("SELECT * FROM users;", conn);
+			var mySqlCommand = new MySqlCommand("SELECT * FROM users;", conn);
 			var reader = mySqlCommand.ExecuteReader();
-			List<User> users = new List<User>();
+			var users = new List<User>();
 			while (reader.Read()) {
 				var result = new User();
 				result.Username = reader.GetString("name");
@@ -43,9 +42,9 @@ public class UserDbContext
 	}
 
 	public void AddRecord(string Name, string Password) {
-		using (MySqlConnection conn = new MySqlConnection(Config.ConnectionString)) {
+		using (var conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			MySqlCommand mySqlCommand = new MySqlCommand("""
+			var mySqlCommand = new MySqlCommand("""
 				INSERT INTO users (`name`, `password`, `dateOfJoining`, `photoUrl`, `admin`)
 				VALUES (@Name, @Password, NOW(), '', 0);
 				""", conn);
@@ -56,9 +55,9 @@ public class UserDbContext
 	}
 
 	public void RemoveRecord(string Username) {
-		using (MySqlConnection conn = new MySqlConnection(Config.ConnectionString)) {
+		using (var conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			MySqlCommand mySqlCommand = new MySqlCommand($"DELETE FROM users WHERE `name`=@Name;", conn);
+			var mySqlCommand = new MySqlCommand($"DELETE FROM users WHERE `name`=@Name;", conn);
 			mySqlCommand.Parameters.AddWithValue("name", Username);
 
 			mySqlCommand.ExecuteNonQuery();
@@ -66,20 +65,20 @@ public class UserDbContext
 	}
 
 	public User FindRecord(string Username) {
-		User user = new User();
+		var user = new User();
 
-		using (MySqlConnection conn = new MySqlConnection(Config.ConnectionString)) {
+		using (var conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			MySqlCommand mySqlCommand = new MySqlCommand("SELECT * FROM users WHERE `name`=@Name", conn);
+			var mySqlCommand = new MySqlCommand("SELECT * FROM users WHERE `name`=@Name", conn);
 			mySqlCommand.Parameters.AddWithValue("name", Username);
-			
+
 			var reader = mySqlCommand.ExecuteReader();
 			while (reader.Read()) {
 				user.Username = reader.GetString("name");
 				user.Password = reader.GetString("password");
 				user.JoinDate = reader.GetDateOnly("dateOfJoining");
 				user.PhotoUrl = reader.GetString("photoUrl");
-				user.IsAdmin  = reader.GetInt32("admin");
+				user.IsAdmin = reader.GetInt32("admin");
 				Console.WriteLine(user);
 			}
 		}
@@ -87,10 +86,10 @@ public class UserDbContext
 	}
 
 	public int FindAppeareanceCount(string Username) {
-		int result = 0;
-		using (MySqlConnection conn = new MySqlConnection(Config.ConnectionString)) {
+		var result = 0;
+		using (var conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			MySqlCommand mySqlCommand = new MySqlCommand($"SELECT COUNT(*) AS num FROM users WHERE `name`=@Name", conn);
+			var mySqlCommand = new MySqlCommand($"SELECT COUNT(*) AS num FROM users WHERE `name`=@Name", conn);
 			mySqlCommand.Parameters.AddWithValue("name", Username);
 
 			result = int.Parse(mySqlCommand.ExecuteScalar().ToString());

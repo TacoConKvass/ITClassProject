@@ -1,13 +1,11 @@
-using ITClassProject.Database;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using ITClassProject.Pages.Shared;
+using ITClassProject.Database.Models;
 
 namespace ITClassProject.Pages
 {
-    public class AdminModel : _PageModel
+	public class AdminModel : _PageModel
     {
-		UserDbContext context = new UserDbContext();
+		UserDbContext context = Database.Database.GetUserDbContext();
 
 		public void OnPost() {
 			var userForDeletion = Request.Form["usernameForDeletion"].ToString();
