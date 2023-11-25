@@ -9,18 +9,16 @@
 <link rel="stylesheet" type="text/css" href="/css/main.css" />
 
 <main id="main-content">
-	<div style="width:100%; display:inline-flex; flex-direction:column;">
+	<div style="width:80%; display:inline-flex; flex-direction:column; margin-bottom: 30px; justify-content:space-around;">
 		<form autocomplete="off" id="add-quote-form" method="post">
-			<h3>Submit quote</h3>
-			<div style="display:inline-flex; flex-direction:row;">
-				<div class="quote-input">
-					<textarea form="add-quote-form" name="source" placeholder="Source" maxlength="100" wrap="soft" class="source" rows="1" cols="100" required></textarea> <br>
-					<textarea form="add-quote-form" name="quote" placeholder="Quote..." maxlength="400" wrap="soft" class="quote" rows="0" cols="100" required></textarea>
-				</div>
+			<h2 style="color:  rgba(0, 120, 255, 1); margin-top:50px;">SUBMIT QUOTE</h2>
+			<div class="quote-input" style="flex-direction:column">
+				<textarea form="add-quote-form" name="source" placeholder="Source" maxlength="100" wrap="soft"  rows="1" cols="100" required style="width:95%;"></textarea> <br>
+				<textarea form="add-quote-form" name="quote" placeholder="Quote..." maxlength="400" wrap="soft" rows="3" cols="100" required style="width:95%;"></textarea> <br>
+			</div>
 
-				<div class="submit-quote">
-					<input type="submit" value="Submit quote" />
-				</div>
+			<div class="submit-quote">
+				<input type="submit" value="Submit" />
 			</div>
 			@Html.AntiForgeryToken()
 		</form>
@@ -50,7 +48,7 @@
 
 				<div class="quote-content">
 					<text>
-						@quote.Content
+						"@quote.Content"
 					</text>
 				</div>
 			</div>
@@ -65,11 +63,9 @@
 			console.log(id)
 			fetch(`/api/quote?id=${id}`, {
 				method: 'DELETE'
+			}).then(() => {
+				window.location.href = "../"
 			})
-			// OMINIĘTE ŻEBY ERROR W KONSOLI BYŁO WIDAĆ
-			//.then(() => {
-			//	window.location.href = "../"
-			//})
 		}
 	}
 </script>
