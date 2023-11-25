@@ -38,15 +38,11 @@
 					<text> | </text>
 					<text> Source: @quote.Source </text>
 					@{
-						if ((TempData.Peek("username").ToString() == quote.Author && TempData.Peek("username").ToString() != "Guest") || TempData.Peek("isAdmin").ToString() == "1")
+						if ((Model.currentUsername.ToString() == quote.Author && Model.currentUsername != "Guest") || Model.admin)
 						{
 							<text> | </text>
-							<button type="button">
+							<button onclick="onDelete(@quote.Id)">
 								Delete
-							</button>
-							<text> | </text>
-							<button type="button">
-								Edit
 							</button>
 						}
 					}
@@ -61,3 +57,19 @@
 		}
 	}
 </main>
+
+<script>
+	function onDelete(id) {
+		var confirmed = confirm("Are you sure you want to delete this quote?")
+		if (confirmed) {
+			console.log(id)
+			fetch(`/api/quote?id=${id}`, {
+				method: 'DELETE'
+			})
+			// OMINIĘTE ŻEBY ERROR W KONSOLI BYŁO WIDAĆ
+			//.then(() => {
+			//	window.location.href = "../"
+			//})
+		}
+	}
+</script>

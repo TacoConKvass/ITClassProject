@@ -67,10 +67,8 @@ public class QuoteDbContext
 	/// <summary>
 	/// Remove quote from the database
 	/// </summary>
-	/// <param name="quoteForDeletion">Quote object associated with the quote you want to delete</param>
-	public void RemoveQuote(Quote quoteForDeletion) {
-		int id = quoteForDeletion.Id;
-
+	/// <param name="id">ID of the quote you want to delete</param>
+	public void RemoveQuote(int id) {
 		using (var conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
 			var mySqlCommand = new MySqlCommand($"DELETE FROM `quotes` WHERE `id`=@Id;", conn);
