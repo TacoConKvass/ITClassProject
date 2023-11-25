@@ -9,6 +9,23 @@
 <link rel="stylesheet" type="text/css" href="/css/main.css" />
 
 <main id="main-content">
+	<div style="width:100%; display:inline-flex; flex-direction:column;">
+		<form autocomplete="off" id="add-quote-form" method="post">
+			<h3>Submit quote</h3>
+			<div style="display:inline-flex; flex-direction:row;">
+				<div class="quote-input">
+					<textarea form="add-quote-form" name="source" placeholder="Source" maxlength="100" wrap="soft" class="source" rows="1" cols="100" required></textarea> <br>
+					<textarea form="add-quote-form" name="quote" placeholder="Quote..." maxlength="400" wrap="soft" class="quote" rows="0" cols="100" required></textarea>
+				</div>
+
+				<div class="submit-quote">
+					<input type="submit" value="Submit quote" />
+				</div>
+			</div>
+			@Html.AntiForgeryToken()
+		</form>
+	</div>
+
 	@{
 		var quotesDbContext = ITClassProject.Database.Database.GetQuoteDbContext();
 		var quotes = quotesDbContext.GetAllQuotes();
@@ -21,14 +38,14 @@
 					<text> | </text>
 					<text> Source: @quote.Source </text>
 					@{
-						if (TempData.Peek("username").ToString() == quote.Author)
+						if ((TempData.Peek("username").ToString() == quote.Author && TempData.Peek("username").ToString() != "Guest") || TempData.Peek("isAdmin").ToString() == "1")
 						{
 							<text> | </text>
 							<button type="button">
 								Delete
 							</button>
 							<text> | </text>
-							<button type="button" onclick="">
+							<button type="button">
 								Edit
 							</button>
 						}
