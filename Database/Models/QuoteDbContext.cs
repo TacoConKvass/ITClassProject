@@ -114,7 +114,7 @@ public class QuoteDbContext
 
 		using (var conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			var mySqlCommand = new MySqlCommand("SELECT * FROM `quotes` WHERE `author` LIKE @Author, conn);");
+			var mySqlCommand = new MySqlCommand("SELECT * FROM `quotes` WHERE `author` LIKE @Author;", conn);
 			mySqlCommand.Parameters.AddWithValue("author", author.ToString() + "%");
 
 			var reader = mySqlCommand.ExecuteReader();
@@ -142,7 +142,7 @@ public class QuoteDbContext
 
 		using (var conn = new MySqlConnection(Config.ConnectionString)) {
 			conn.Open();
-			var mySqlCommand = new MySqlCommand("SELECT * FROM `quotes` WHERE `source` LIKE @Source, conn);");
+			var mySqlCommand = new MySqlCommand("SELECT * FROM `quotes` WHERE `source` LIKE @Source;", conn);
 			mySqlCommand.Parameters.AddWithValue("source", source.ToString() + "%");
 
 			var reader = mySqlCommand.ExecuteReader();

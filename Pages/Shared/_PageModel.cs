@@ -8,7 +8,7 @@ namespace ITClassProject.Pages.Shared
 		public bool admin = false;
 		public string currentUsername = "Guest";
 
-		public void OnGet() {
+		public virtual void OnGet() {
 			if (TempData.Peek("username") is null) {
 				TempData["username"] = "Guest";
 			}

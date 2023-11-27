@@ -11,17 +11,52 @@
 		Shaboing
 	</div>
 	<div id="search-form">
-		<form method="get">
+		<form method="post" id="search-form-form">
 			<label>Search by:</label>
-			<select name="searchType" form="search=form">
+			<select id="searchType" name="searchType" form="search-form-form">
 				<option value="author">Author</option>
 				<option value="source">Source</option>
 				<option value="content">Content</option>
 			</select>
-			<input type="search" name="q" id="q" placeholder="Search..."/>
+			<input type="search" name="q" id="q" placeholder="Search..." required/>
 			<input type="submit">
 				<img src="https://cdn-icons-png.flaticon.com/512/145/145471.png" width="10">
 			</input>
+			@Html.AntiForgeryToken()
 		</form>
+	</div>
+
+	<div>
+		@{
+			var quotes = Model.searchedQuotes;
+			quotes.Add(new ITClassProject.Database.Models.Quote());
+			quotes.Reverse();
+			foreach (ITClassProject.Database.Models.Quote quote in quotes)
+			{
+				<div class="quote">
+					<div class="quote-details">
+						<text>Author: @quote.Author </text>
+						<text> | </text>
+						<text> Source: @quote.Source </text>
+						@{
+							if ((Model.currentUsername.ToString() == quote.Author && Model.currentUsername != "Guest") || Model.admin)
+							{
+								<text> | </text>
+								<button onclick="onDelete(@quote.Id)">
+									Delete
+								</button>
+							}
+						}
+					</div>
+
+					<div class="quote-content">
+						<text>
+							"@quote.Content"
+						</text>
+					</div>
+				</div>
+			}
+
+		}
 	</div>
 </main>
