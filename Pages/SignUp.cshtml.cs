@@ -8,7 +8,7 @@ namespace ITClassProject.Pages
 		UserDbContext userDb = Database.Database.GetUserDbContext();
 
 		public List<string> Captcha = new List<string>();
-		public int random = 0;
+		public int random = 1;
 		public Random Random = new Random();
 
 		public bool usernameNull = false;
