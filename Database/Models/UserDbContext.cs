@@ -97,7 +97,6 @@ public class UserDbContext
 				user.JoinDate = reader.GetDateOnly("dateOfJoining");
 				user.PhotoUrl = reader.GetString("photoUrl");
 				user.IsAdmin = reader.GetInt32("admin");
-				Console.WriteLine(user);
 			}
 		}
 		return user;
