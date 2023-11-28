@@ -7,6 +7,10 @@ namespace ITClassProject.Pages
     {
 		UserDbContext userDb = Database.Database.GetUserDbContext();
 
+		public List<string> Captcha = new List<string>();
+		public int random = 0;
+		public Random Random = new Random();
+
 		public bool usernameNull = false;
 		public bool passwordNull = false;
 		public bool rpasswordNull = false;
@@ -16,6 +20,19 @@ namespace ITClassProject.Pages
 		public bool noSpecialChars = false;
 		public bool noNnums = false;
 		public bool notMatching = false;
+
+		public override void OnGet() {
+			base.OnGet();
+			Captcha.Add("HAPK3");
+			Captcha.Add("3M56R");
+			Captcha.Add("D4TSH");
+			Captcha.Add("R84CH");
+			Captcha.Add("459CT");
+			Captcha.Add("TSMS9");
+			Captcha.Add("RBSKW");
+			Captcha.Add("W93BX");
+			random = Random.Next(1, 8);
+		}
 
 		public void OnPost() {
 			usernameNull = false;

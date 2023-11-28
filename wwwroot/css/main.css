@@ -48,4 +48,7 @@ div.quote-input {
     display: flex;
     flex-direction: column;
     margin: 0px;
+    text-align: center;
+    align-content: center;
+    justify-items: center;
 }

@@ -5,11 +5,9 @@
 	Layout = "_Layout";
 }
 <link rel="stylesheet" type="text/css" href="/css/search.css">
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
 
 <main id="main-content">
-	<div id="search-explanation">
-		Shaboing
-	</div>
 	<div id="search-form">
 		<form method="post" id="search-form-form">
 			<label>Search by:</label>
@@ -26,10 +24,9 @@
 		</form>
 	</div>
 
-	<div>
+	<div style="width:100%">
 		@{
 			var quotes = Model.searchedQuotes;
-			quotes.Add(new ITClassProject.Database.Models.Quote());
 			quotes.Reverse();
 			foreach (ITClassProject.Database.Models.Quote quote in quotes)
 			{

@@ -8,6 +8,13 @@
 
   <ItemGroup>
     <None Include="wwwroot\css\layout.css" />
+    <None Include="wwwroot\images\cap1.jpg" />
+    <None Include="wwwroot\images\cap2.jpg" />
+    <None Include="wwwroot\images\cap4.jpg" />
+    <None Include="wwwroot\images\cap5.jpg" />
+    <None Include="wwwroot\images\cap6.jpg" />
+    <None Include="wwwroot\images\cap7.jpg" />
+    <None Include="wwwroot\images\cap8.jpg" />
   </ItemGroup>
 
   <ItemGroup>

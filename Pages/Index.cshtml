@@ -12,13 +12,31 @@
 	<div style="width:80%; display:inline-flex; flex-direction:column; margin-bottom: 30px; justify-content:space-around;">
 		<form autocomplete="off" id="add-quote-form" method="post">
 			<h2 style="color:  rgba(0, 120, 255, 1); margin-top:50px;">SUBMIT QUOTE</h2>
-			<div class="quote-input" style="flex-direction:column">
+			<div class="quote-input" style="flex-direction:column; align-items:center;">
 				<textarea form="add-quote-form" name="source" placeholder="Source" maxlength="100" wrap="soft"  rows="1" cols="100" required style="width:95%;"></textarea> <br>
 				<textarea form="add-quote-form" name="quote" placeholder="Quote..." maxlength="400" wrap="soft" rows="3" cols="100" required style="width:95%;"></textarea> <br>
-			</div>
+				@{
+					string imagePath = $"./images/cap{Model.random}.jpg";
+					if (Model.currentUsername == "Guest")
+					{
+						<text>Captcha</text>
 
+						<img src=@imagePath width="200" />
+						<input type="text" id="captcha" name="Captcha" placeholder="" form="add-quote-form" required style="width:95%" oninput="onChange(event)"> <br>
+					}
+				}
+			</div>
 			<div class="submit-quote">
-				<input type="submit" value="Submit" />
+				@{
+					if (Model.currentUsername == "Guest")
+					{
+						<input id="submit" type="submit" value="Submit" disabled />
+					}
+					else
+					{
+						<input id="submit" type="submit" value="Submit"/>
+					}
+				}
 			</div>
 			@Html.AntiForgeryToken()
 		</form>
@@ -67,5 +85,18 @@
 				window.location.href = "../"
 			})
 		}
+	}
+	function onChange(e) {
+		if ("@Model.Captcha[Model.random-1]" === e.target.value) {
+			document.getElementById("submit").disabled = false;
+			document.getElementById("captcha").disabled = true;
+		}
+		else {
+			document.getElementById("submit").disabled = true;
+		}
+	}
+
+	if (window.history.replaceState) {
+		window.history.replaceState(null, null, window.location.href);
 	}
 </script>

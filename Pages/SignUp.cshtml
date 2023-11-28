@@ -64,18 +64,24 @@
 
 	<div style="display:inline-flex; flex-direction:row;">
 		<div style="line-height:30px;">
-			<form method="post" autocomplete="off">
+			<form method="post" autocomplete="off" id="sign-up-form">
 				<input type="text" placeholder="Username" id="username" name="username" maxlength="20"><br>
 				<input type="password" placeholder="Password" id="password" name="password" class="js-password"><br>
 				<input type="password" placeholder="Repeat password" id="rpassword" name="rpassword" class="js-password"><br>
-				<input type="submit" value="Sign up" class="js-login">
+				@{
+					string imagePath = $"./images/cap{Model.random}.jpg";
+					<text>Captcha: </text><br>
+					<img src=@imagePath /><br>
+					<input type="text" id="captcha" name="Captcha" placeholder="" form="sign-up-form" required oninput="onChange(event)"> <br>
+				}
+				<input id="submit" type="submit" value="Sign up" class="js-login" disabled>
 				@Html.AntiForgeryToken()
 			</form>
 		</div>
 
 		<div style="display:flex; align-items:center; justify-content:center; height:92px;">
 			<button class="js-eye" type="button">
-				<img src="https://cdn-icons-png.flaticon.com/512/65/65000.png" width="10" height="10" />
+				<img src="https://cdn-icons-png.flaticon.com/512/65/65000.png" width="10" height="10" /> <br>
 			</button>
 		</div>
 	</div>
@@ -101,5 +107,14 @@
 	function forceHidePassword() {
 		passwordField.type = 'password';
 		rpasswordField.type = 'password';
+	}
+
+	function onChange(e) {
+		if ("@Model.Captcha[Model.random - 1]" === e.target.value) {
+			document.getElementById("submit").disabled = false;
+		}
+		else {
+			document.getElementById("submit").disabled = true;
+		}
 	}
 </script>
