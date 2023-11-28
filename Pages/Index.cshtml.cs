@@ -17,8 +17,6 @@ namespace ITClassProject.Pages
 		public override void OnGet() {
 			base.OnGet();
 			random = Random.Next(1, 8);
-			Console.WriteLine(random);
-			Console.WriteLine(Captcha.Count());
 		}
 
 		public void OnPost() {
