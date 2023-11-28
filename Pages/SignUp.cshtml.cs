@@ -7,7 +7,7 @@ namespace ITClassProject.Pages
     {
 		UserDbContext userDb = Database.Database.GetUserDbContext();
 
-		public List<string> Captcha = new List<string>();
+		public List<string> Captcha = new List<string>() { "HAPK3", "3M56R", "D4TSH", "R84CH", "459CT", "TSMS9", "RBSKW", "W93BX" };
 		public int random = 1;
 		public Random Random = new Random();
 
@@ -23,14 +23,6 @@ namespace ITClassProject.Pages
 
 		public override void OnGet() {
 			base.OnGet();
-			Captcha.Add("HAPK3");
-			Captcha.Add("3M56R");
-			Captcha.Add("D4TSH");
-			Captcha.Add("R84CH");
-			Captcha.Add("459CT");
-			Captcha.Add("TSMS9");
-			Captcha.Add("RBSKW");
-			Captcha.Add("W93BX");
 			random = Random.Next(1, 8);
 		}
 
